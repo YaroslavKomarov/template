@@ -1,57 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#000000" />
-		<script src="https://kit.fontawesome.com/901bbed369.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="./styles.css">
-		<title>SpotiClone</title>
-	</head>
-	<body class="app">
-		<header class="header">
-			<a href="/" class="header__main-link link">
-				<img class="header__logo" src="./assets/images/spotify-logo.png" alt="spotify logo" height="36">
-				<h1 class="header__title spoti">Spoti</h1>
-				<h1 class="header__title clone">Clone</h1>
-			</a>
-			<form class="header__search-wrap">
-				<input class="header__search" type="text" placeholder="Искать..." />
-				<button class="header__search-btn btn"></button>
-			</form> 
-		</header>
-		<aside class="accordion">
-			<div class="accordion__title">РАЗДЕЛЫ</div>
-			<ul class="tags">
-				<li class="tag">
-					<a href="/" class="tag__link link">Трэки</a>
-				</li>
-				<li class="tag">
-					<a href="/" class="tag__link link">Альбомы</a>
-				</li>
-				<li class="tag">
-					<a href="/" class="tag__link link">Исполнители</a>
-				</li>
-			</ul>
-		</aside>
-		<main class="content">
-			
-		</main>
-		<footer class="footer">
-			<nav class="footer__navigation">
-				<i class="fa-solid fa-code"></i>
-				<a 
-					href="https://web.telegram.org/" 
-					target="_blank"
-					rel="noopener"
-					class="link">Telegram</a>
-				<a 
-					href="https://github.com/"
-					target="_blank"
-					rel="noopener"
-					class="link">GitHub</a>
-			</nav>
-			<p>© 2022 Spotify AB</p>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/src/index.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>
