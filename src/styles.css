@@ -187,6 +187,7 @@
 
 .page-title {
   color: #222326;
+  font-size: 28px;
 }
 
 .content__title {
@@ -199,13 +200,14 @@
 
 .prevew-area__content {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .prevew-area__title-wrap {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .prevew-area__show-all-items {
@@ -218,10 +220,6 @@
   text-decoration: underline;
 }
 
-.prevew-area__title {
-  margin-bottom: 15px;
-}
-
 .card {
   padding: 15px;
   border-radius: 10px;
@@ -230,10 +228,11 @@
   transition-property: background-color, border-color, color, box-shadow, filter;
   transition-duration: 0.3s;
   cursor: pointer;
+  margin: 0 10px 15px 0;
 }
 
 .card:hover {
-  background-color: #555555;
+  background-color: #606060;
 }
 
 .card img {

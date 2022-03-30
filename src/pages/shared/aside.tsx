@@ -7,13 +7,13 @@ function Aside() {
                 <div className="accordion__title">РАЗДЕЛЫ</div>
                 <ul className="tags">
                     <li className="tag">
-                        <a href="/" className="tag__link link">Главная</a>
+                        <NavLink to="/" className="tag__link link">Главная</NavLink>
                     </li>
                     <li className="tag">
-                        <a href="/" className="tag__link link">Медиатека</a>
+                        <NavLink to="/mediateka" className="tag__link link">Медиатека</NavLink>
                     </li>
                     <li className="tag">
-                        <a href="/" className="tag__link link">Любимые треки</a>
+                        <NavLink to="/favoriteTracks" className="tag__link link">Любимые треки</NavLink>
                     </li>
                 </ul>
         </aside>

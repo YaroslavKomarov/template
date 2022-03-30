@@ -11,7 +11,7 @@ function Header() {
 			</NavLink>
 			<div className="header__right-wrap">
 				<form className="header__search-form">
-					<input className="header__search" type="text" placeholder="Искать..." />
+					<input className="header__search" type="text" placeholder="Исполнитель, трек или подкаст" />
 					<button className="header__search-btn btn"></button>
 				</form> 
 				<NavLink to="/" className="header__user-link link">
