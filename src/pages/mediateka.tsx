@@ -15,7 +15,7 @@ function Mediateka() {
 						<h2 className="prevew-area__title page-title">Плэйлисты</h2>
 					</div>
 					<div className="prevew-area__content">
-						<NavLink to="/playlist" className="card">
+						<NavLink to="/playlist" className="card" style={{textDecoration: 'none'}}>
 							<img src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
 							<div className="card__title">M&M's</div>
 							<div className="card__subtitle">Автор: user</div>
