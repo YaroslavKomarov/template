@@ -10,7 +10,7 @@ function Playlist() {
             <div className="playlist">
                 <div className="playlist__header">
                     <div className="playlist__back-btn btn">
-                        <i className="fa fa-chevron-circle-left"/>
+                        <i className="fa fa-angle-left"></i>
                     </div>
                     <img src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
                     <h1 className="playlist__title page-title">M&M's</h1>
