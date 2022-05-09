@@ -16,27 +16,27 @@ function Index() {
 					</div>
 					<div className="prevew-area__content">
 						<div className="card">
-							<img src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
+							<img className="card__image" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
 							<div className="card__title">Without me</div>
 							<div className="card__subtitle">Eminem</div>
 						</div>
 						<div className="card">
-							<img src="assets/images/tracks/Eminem_show.jpg"/>
+							<img className="card__image"src="assets/images/tracks/Eminem_show.jpg"/>
 							<div className="card__title">Lose Yourself</div>
 							<div className="card__subtitle">Eminem</div>
 						</div>
 						<div className="card">
-							<img src="assets/images/tracks/Eminem_To_Be_Murdered_By.jpg"/>
+							<img className="card__image" src="assets/images/tracks/Eminem_To_Be_Murdered_By.jpg"/>
 							<div className="card__title">Rap God</div>
 							<div className="card__subtitle">Eminem</div>
 						</div>
 						<div className="card">
-							<img src="assets/images/tracks/Eminem-revival-sober.jpg"/>
+							<img className="card__image" src="assets/images/tracks/Eminem-revival-sober.jpg"/>
 							<div className="card__title">Soldier</div>
 							<div className="card__subtitle">Eminem</div>
 						</div>
 						<div className="card">
-							<img src="assets/images/tracks/Eminem_show.jpg"/>
+							<img className="card__image" src="assets/images/tracks/Eminem_show.jpg"/>
 							<div className="card__title">'Till I Collapse</div>
 							<div className="card__subtitle">Eminem</div>
 						</div>
@@ -49,27 +49,27 @@ function Index() {
 					</div>
 					<div className="prevew-area__content">
 						<div className="author-card card">
-							<img src="assets/images/authors/Eminem.jpg"/>
+							<img className="card__image" src="assets/images/authors/Eminem.jpg"/>
 							<div className="card__title">Eminem</div>
 							<div className="card__subtitle">Исполнитель</div>
 						</div>
 						<div className="author-card card">
-							<img src="assets/images/authors/Tzoi.jpg"/>
+							<img className="card__image" src="assets/images/authors/Tzoi.jpg"/>
 							<div className="card__title">Виктор Цой</div>
 							<div className="card__subtitle">Исполнитель</div>
 						</div>
 						<div className="author-card card">
-							<img src="assets/images/authors/Linkin_Park.jpg"/>
+							<img className="card__image" src="assets/images/authors/Linkin_Park.jpg"/>
 							<div className="card__title">Linkin Park</div>
 							<div className="card__subtitle">Исполнитель</div>
 						</div>
 						<div className="author-card card">
-							<img src="assets/images/authors/DDT.jpg"/>
+							<img className="card__image" src="assets/images/authors/DDT.jpg"/>
 							<div className="card__title">ДДТ</div>
 							<div className="card__subtitle">Исполнитель</div>
 						</div>
 						<div className="author-card card">
-							<img src="assets/images/authors/Boyarsky.jpg"/>
+							<img className="card__image" src="assets/images/authors/Boyarsky.jpg"/>
 							<div className="card__title">Михаил Боярский</div>
 							<div className="card__subtitle">Исполнитель</div>
 						</div>
