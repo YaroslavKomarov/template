@@ -1,8 +1,27 @@
-import Header from '../pages/shared/header';
-import Aside from '../pages/shared/aside';
-import Footer from '../pages/shared/footer';
+import { fetchPlaylistInfo } from '../scripts/fetchSpotify';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import Header from './shared/header';
+import Aside from './shared/aside';
+import Footer from './shared/footer';
+
+interface IPlaylist {
+    name: string | null;
+    images: any[];
+    email: string;
+};
 
 function Playlist() {
+    const [playlist, setPlaylist] = useState({} as IPlaylist)
+    const { id } = useParams();
+
+    useEffect(() => {
+        const doFetch = async () => {
+            await fetchPlaylistInfo(id).then(playlistsData => setPlaylist(playlistsData));
+        }
+        doFetch();
+    }, [id]); 
+
     return (
         <div className="app">
 			<Header/>
@@ -12,8 +31,8 @@ function Playlist() {
                     <div className="playlist__back-btn btn">
                         <i className="fa fa-angle-left"></i>
                     </div>
-                    <img src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
-                    <h1 className="playlist__title page-title">M&M's</h1>
+                    <img src={playlist.images.length > 0 ? playlist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
+                    <h1 className="playlist__title page-title">{playlist.name}</h1>
                 </div>
                 <div className="items-list">
                     <div className="items-list__title">

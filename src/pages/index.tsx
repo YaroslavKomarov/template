@@ -1,8 +1,20 @@
 import Header from './shared/header';
 import Aside from './shared/aside';
 import Footer from './shared/footer';
+import Cookies from 'js-cookie';
+import { CODE_URL } from './auth';
 
 function Index() {
+	// if (!Cookies.get('access_token')) {
+	// 	return (
+	// 		<div className="app">
+	// 			<div className="authorization">
+	// 				<img className="authorization__img" src="assets/images/spotify-logo-login.png"></img>
+	// 				<a href={CODE_URL} className="authorization__login-link">Log in Spotify</a>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 	return (
 		<div className="app">
 			<Header/>

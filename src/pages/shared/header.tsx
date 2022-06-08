@@ -14,7 +14,7 @@ function Header() {
 					<input className="header__search" type="text" placeholder="Исполнитель, трек или подкаст" />
 					<button className="header__search-btn btn"></button>
 				</form> 
-				<NavLink to="/" className="header__user-link link">
+				<NavLink to="/profile" className="header__user-link link">
 					<i className="fa fa-user-circle"></i>
 				</NavLink>
 			</div>
