@@ -12,21 +12,20 @@ import Mediateka from './pages/mediateka';
 import FavoriteTracks from './pages/favoriteTracks';
 
 export default function App() {
+    const doesTokenExist = typeof(Cookies.get('access_token')) === 'string';
+
     useEffect(() => {
-        if (Cookies.get('refresh_token') && !Cookies.get('access_token')) {
-            const fetchData = async () => await fetchToken();
-            fetchData();
+        if (Cookies.get('refresh_token') && !doesTokenExist) {
+            fetchToken();
         }
     }, []);
 
     return (
         <BrowserRouter>
             <Routes>
-                {Cookies.get('access_token') 
-                    ? <Route path="/" element={<Index />} /> 
-                    : <Route path="/" element={<Login />} />
-                }
+                <Route path="/" element={<Index />} />
                 <Route path="auth" element={<Auth />} />
+                <Route path="login" element={<Login />} />
                 <Route path="search" element={<Search />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="mediateka" element={<Mediateka />} />

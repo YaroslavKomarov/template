@@ -1,22 +1,22 @@
+import { fetchUserProfile } from '../scripts/fetchSpotify';
 import { useEffect, useState } from 'react';
 import Header from './shared/header';
 import Footer from './shared/footer';
 import Aside from './shared/aside';
-import { NavLink } from 'react-router-dom';
-import { fetchUserProfile } from '../scripts/fetchSpotify';
+import LoadingPage from './loading';
 
 interface IProfileInfo {
-    displayName: string | null;
-    country: string | null;
-    email: string | null;
+    displayName: string;
+    country: string;
+    email: string;
     followers: {
         href: string;
         total: number;
-    } | null;
+    };
 }
 
 function Profile() {
-    const [profile, setProfile] = useState({} as IProfileInfo)
+    const [profile, setProfile] = useState<IProfileInfo | null>(null);
 
     useEffect(() => {
         const doFetch = async () => {
@@ -29,7 +29,7 @@ function Profile() {
         <div className="app">
             <Header/>
             <Aside />
-            {profile.displayName !== null ? (
+            {profile ? (
                 <div className="profile">
                     <div className="profile__header">
                         <h1 className="profile__acc-title content__title">Аккаунт</h1>
@@ -56,11 +56,7 @@ function Profile() {
                     </div>
                 </div>
             ) : (
-                <div className="content">
-                    <div className="content__error-title">
-                        Ошибка получения токена. Нажмите <NavLink to="/" className='content__error-auth-link'><p>сюда</p></NavLink>
-                    </div>
-                </div>
+                <LoadingPage />
             )}
             <Footer/>
         </div>

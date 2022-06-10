@@ -1,20 +1,49 @@
+import { fetchRecommendations } from '../scripts/fetchSpotify'
+import { useEffect, useState } from 'react';
 import Header from './shared/header';
 import Aside from './shared/aside';
 import Footer from './shared/footer';
 import Cookies from 'js-cookie';
 import { CODE_URL } from './auth';
+import Login from './login';
+import TrackCard from '../components/trackCard';
+import { resolve } from 'path';
+import { Navigate } from 'react-router-dom';
+
+export interface IArtist {
+	id: string;
+	name: string;
+	href: string;
+	uri: string;
+}
+
+export interface ITrack {
+	artists: IArtist[];
+	duration_ms: number;
+	name: string;
+	href: string;
+	uri: string;
+};
+
+export interface IRecommendations {
+	tracks: ITrack[];
+};
 
 function Index() {
-	// if (!Cookies.get('access_token')) {
-	// 	return (
-	// 		<div className="app">
-	// 			<div className="authorization">
-	// 				<img className="authorization__img" src="assets/images/spotify-logo-login.png"></img>
-	// 				<a href={CODE_URL} className="authorization__login-link">Log in Spotify</a>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
+	const [recommendations, setRecommendations] = useState({} as IRecommendations);
+
+    useEffect(() => {
+		if (Cookies.get('access_token')) {
+			const fetchData = async () => {
+				await fetchRecommendations().then(playlistsData => setRecommendations(playlistsData));			
+			}
+			fetchData();
+		}
+    }, []);
+	
+	if (!Cookies.get('access_token')) {
+		return <Navigate to='/login' />;
+	}
 	return (
 		<div className="app">
 			<Header/>
@@ -27,6 +56,13 @@ function Index() {
 						<div className="prevew-area__show-all-items">смотреть все</div>
 					</div>
 					<div className="prevew-area__content">
+						{
+							// recommendations?.tracks.length > 0 && recommendations?.tracks.map(item => {
+							// 	return (
+							// 		<TrackCard href={item.href}/>
+							// 	);
+							// })
+						}
 						<div className="card">
 							<img className="card__image" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
 							<div className="card__title">Without me</div>

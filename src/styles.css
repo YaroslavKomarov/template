@@ -377,10 +377,6 @@
   gap: 5rem;
 }
 
-.authorization-success {
-  background-color: #ffffff;
-}
-
 .authorization__img {
   height: 20vh;
 }
@@ -454,4 +450,10 @@
 
 .line__value {
   color: #000000;
+}
+
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
