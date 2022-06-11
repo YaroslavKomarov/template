@@ -523,6 +523,7 @@
   margin: 20px 25px 0 0;
   -webkit-box-shadow: 0px 7px 35px 5px rgba(18, 18, 18, 0.68);
   box-shadow: 0px 7px 35px 5px rgba(18, 18, 18, 0.68);
+  border-radius: 50%;
 }
 
 .album-prevew-area {
