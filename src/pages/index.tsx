@@ -1,129 +1,85 @@
-import { fetchRecommendations } from '../scripts/fetchSpotify'
-import { useEffect, useState } from 'react';
-import Header from './shared/header';
-import Aside from './shared/aside';
-import Footer from './shared/footer';
-import Cookies from 'js-cookie';
-import { CODE_URL } from './auth';
-import Login from './login';
-import TrackCard from '../components/trackCard';
-import { resolve } from 'path';
+import { IAlbum, IArtistDetail, IPlaylistCard } from '../scripts/commonSpotifyInterfaces';
 import { Navigate } from 'react-router-dom';
-
-export interface IArtist {
-	id: string;
-	name: string;
-	href: string;
-	uri: string;
-}
-
-export interface ITrack {
-	artists: IArtist[];
-	duration_ms: number;
-	name: string;
-	href: string;
-	uri: string;
-};
-
-export interface IRecommendations {
-	tracks: ITrack[];
-};
+import { useEffect, useState } from 'react';
+import { 
+	fetchFeaturedPlaylists, 
+	fetchNewReleases,
+	fetchRecommendedArtists 
+} from '../scripts/fetchSpotify'
+import PlaylistCard from '../components/playlistCard';
+import AlbumCard from '../components/albumCard';
+import Header from '../components/shared/header';
+import Footer from '../components/shared/footer';
+import Aside from '../components/shared/aside';
+import LoadingPage from './loading';
+import Cookies from 'js-cookie';
+import ArtistCard from '../components/artistCard';
 
 function Index() {
-	const [recommendations, setRecommendations] = useState({} as IRecommendations);
+	const [recommendedArtists, setRecommendedArtists] = useState<any>(null);
+	const [featuredPlaylists, setFeaturedPlaylists] = useState<any>(null);
+	const [newReleases, setNewReleases] = useState<any>(null);
 
     useEffect(() => {
-		if (Cookies.get('access_token')) {
-			const fetchData = async () => {
-				await fetchRecommendations().then(playlistsData => setRecommendations(playlistsData));			
-			}
-			fetchData();
-		}
+		fetchRecommendedArtists('2q3GG88dVwuQPF4FmySr9I').then(data => setRecommendedArtists(data));
+		fetchFeaturedPlaylists().then(data => setFeaturedPlaylists(data));
+		fetchNewReleases().then(data => setNewReleases(data));
     }, []);
 	
 	if (!Cookies.get('access_token')) {
 		return <Navigate to='/login' />;
 	}
+
 	return (
 		<div className="app">
 			<Header/>
 			<Aside />
-			<main className="content">
-				<h1 className="content__title page-title">Рекомендации</h1>
-				<div className="prevew-area">
-					<div className="prevew-area__title-wrap">
-						<h2 className="prevew-area__title page-title">Послушайте эти трэки</h2>
-						<div className="prevew-area__show-all-items">смотреть все</div>
-					</div>
-					<div className="prevew-area__content">
-						{
-							// recommendations?.tracks.length > 0 && recommendations?.tracks.map(item => {
-							// 	return (
-							// 		<TrackCard href={item.href}/>
-							// 	);
-							// })
-						}
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
-							<div className="card__title">Without me</div>
-							<div className="card__subtitle">Eminem</div>
+			{featuredPlaylists && newReleases && recommendedArtists ? (
+				<main className="content">
+					<h1 className="content__title page-title">Рекомендации</h1>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Взгляните на эти плейлисты</h2>
+							<div className="prevew-area__show-all-items">смотреть все</div>
 						</div>
-						<div className="card">
-							<img className="card__image"src="assets/images/tracks/Eminem_show.jpg"/>
-							<div className="card__title">Lose Yourself</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_To_Be_Murdered_By.jpg"/>
-							<div className="card__title">Rap God</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem-revival-sober.jpg"/>
-							<div className="card__title">Soldier</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_show.jpg"/>
-							<div className="card__title">'Till I Collapse</div>
-							<div className="card__subtitle">Eminem</div>
+						<div className="prevew-area__content">
+							{featuredPlaylists.playlists.items.length > 0 && featuredPlaylists.playlists.items.map((item: IPlaylistCard) => {
+								return (
+									<PlaylistCard key={item.id} playlist={item} />
+								);
+							})}
 						</div>
 					</div>
-				</div>
-				<div className="prevew-area">
-					<div className="prevew-area__title-wrap">
-						<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
-						<div className="prevew-area__show-all-items">смотреть все</div>
-					</div>
-					<div className="prevew-area__content">
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Eminem.jpg"/>
-							<div className="card__title">Eminem</div>
-							<div className="card__subtitle">Исполнитель</div>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Свежие релизы</h2>
+							<div className="prevew-area__show-all-items">смотреть все</div>
 						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Tzoi.jpg"/>
-							<div className="card__title">Виктор Цой</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Linkin_Park.jpg"/>
-							<div className="card__title">Linkin Park</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/DDT.jpg"/>
-							<div className="card__title">ДДТ</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Boyarsky.jpg"/>
-							<div className="card__title">Михаил Боярский</div>
-							<div className="card__subtitle">Исполнитель</div>
+						<div className="prevew-area__content">
+							{newReleases.albums.items.length > 0 && newReleases.albums.items.map((item: IAlbum) => {
+								return (
+									<AlbumCard key={item.id} album={item}/>
+								);
+							})}
 						</div>
 					</div>
-				</div>
-			</main>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
+							<div className="prevew-area__show-all-items">смотреть все</div>
+						</div>
+						<div className="prevew-area__content">
+							{recommendedArtists.artists.length > 0 && recommendedArtists.artists.map((item: IArtistDetail) => {
+								return (
+									<ArtistCard key={item.id} artist={item}/>
+								);
+							})}
+						</div>
+					</div>
+				</main>
+			) : (
+				<LoadingPage />
+			)}
 			<Footer/>
 		</div>
 	);

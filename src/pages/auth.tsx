@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { updateBinary } from "typescript";
 import { fetchToken } from "../scripts/fetchSpotify";
 import LoadingPage from "./loading";
 
@@ -20,12 +21,15 @@ export const CODE_URL = 'https://accounts.spotify.com/authorize?response_type=co
     CLIENT_ID + '&redirect_uri=' + REDIRECT_URI + '&scope=' + SCOPE.join(' ');
 
 export default function Auth() {
+    const [error, setError] = useState<any | null>(null);
     const [token, setToken] = useState<string | undefined>(undefined);
     const code = new URLSearchParams(window.location.search).get('code');
     
     useEffect(() => {
         if (code) {
-            fetchToken(code)?.then(() => setToken(Cookies.get('access_token')));
+            fetchToken(code)
+                ?.then(() => setToken(Cookies.get('access_token')))
+                .catch(err => setError(err));
         }
     }, [code]);
 
@@ -34,7 +38,7 @@ export default function Auth() {
             {token ? (
                 <Navigate to='/' />
             ) : (
-                <LoadingPage />
+                error ? <Navigate to='/login' /> : <LoadingPage />
             )}
         </>
     );

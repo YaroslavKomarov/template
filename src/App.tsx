@@ -5,11 +5,13 @@ import Cookies from 'js-cookie';
 import Auth from './pages/auth';
 import Login from './pages/login';
 import Index from './pages/index';
+import Artist from './pages/artist';
 import Search from './pages/search';
 import Profile from './pages/profile';
 import Playlist from './pages/playlist';
 import Mediateka from './pages/mediateka';
-import FavoriteTracks from './pages/favoriteTracks';
+import SavedTracks from './pages/savedTracks';
+import AlbumPlaylist from './pages/albumPlaylist';
 
 export default function App() {
     const doesTokenExist = typeof(Cookies.get('access_token')) === 'string';
@@ -28,9 +30,11 @@ export default function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="search" element={<Search />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="artist/:id" element={<Artist />} />
                 <Route path="mediateka" element={<Mediateka />} />
                 <Route path="playlist/:id" element={<Playlist />} />
-                <Route path="favoriteTracks" element={<FavoriteTracks />} />
+                <Route path="savedTracks" element={<SavedTracks />} />
+                <Route path="albumPlaylist/:id" element={<AlbumPlaylist />} />
             </Routes>
         </BrowserRouter>
     );

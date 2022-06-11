@@ -5,7 +5,7 @@ function Header() {
     return(
         <header className="header">
 			<NavLink to="/" className="header__home-link link">
-				<img src="assets/images/spotify-logo.png" alt="spotify logo" height="36" />
+				<img src="/assets/images/spotify-logo.png" alt="spotify logo" height="36" />
 				<h1 className="header__title spoti">Spoti</h1>
 				<h1 className="header__title clone">Clone</h1>
 			</NavLink>

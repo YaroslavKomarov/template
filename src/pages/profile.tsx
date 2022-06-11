@@ -1,28 +1,18 @@
+import { IProfile } from '../scripts/commonSpotifyInterfaces';
 import { fetchUserProfile } from '../scripts/fetchSpotify';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Header from './shared/header';
-import Footer from './shared/footer';
-import Aside from './shared/aside';
+import Header from '../components/shared/header';
+import Footer from '../components/shared/footer';
+import Aside from '../components/shared/aside';
 import LoadingPage from './loading';
 
-interface IProfileInfo {
-    displayName: string;
-    country: string;
-    email: string;
-    followers: {
-        href: string;
-        total: number;
-    };
-}
-
 function Profile() {
-    const [profile, setProfile] = useState<IProfileInfo | null>(null);
+    const [profile, setProfile] = useState<IProfile | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const doFetch = async () => {
-            await fetchUserProfile().then(profileData => setProfile(profileData));
-        }
-        doFetch();
+        fetchUserProfile().then(profileData => setProfile(profileData));
     }, []); 
             
     return (
@@ -32,14 +22,16 @@ function Profile() {
             {profile ? (
                 <div className="profile">
                     <div className="profile__header">
-                        <h1 className="profile__acc-title content__title">Аккаунт</h1>
-                        <img className="profile__img" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
-                        <h2 className="profile__prof-title page-title">Профиль:</h2>
+                        <button onClick={() => navigate(-1)} className="playlist__back-btn btn">
+                            <i className="fa fa-angle-left"></i>
+                        </button>
+                        <img className="profile__img" src={profile.images?.length > 0 ? profile.images[0].url : "assets/images/default-profile.jpg"}/>
+                        <h2 className="profile__name page-title">{profile.display_name}</h2>
                     </div>
                     <div className="profile__info">
                         <div className="info__line">
                             <div className="line__key">Имя пользователя:</div>
-                            <div className="line__value">Yaroslav</div>
+                            <div className="line__value">{profile.display_name}</div>
                         </div>
                         <div className="info__line">
                             <div className="line__key">Элеткронная почта:</div>

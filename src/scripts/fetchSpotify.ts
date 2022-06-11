@@ -17,7 +17,7 @@ export function fetchToken(code: string | null = null) {
     }).then(resp => {
         Cookies.set('access_token', resp.access_token, { expires: parseInt(resp.expires_in) / 86400, path: '/' });
         Cookies.set('refresh_token', resp.refresh_token, { path: '/' });
-    }).then(response => response).catch(err => console.error(err));
+    }).then(response => response).catch((err) => { throw err });
 };
 
 export function fetchUserProfile() {
@@ -26,7 +26,7 @@ export function fetchUserProfile() {
             'Content-Type': "application/json",
             'Authorization': 'Bearer ' + Cookies.get('access_token')
         }
-    }).then(response => response).catch(err => console.error(err));
+    }).then(response => response).catch((err) => { throw err });
 };
 
 export function fetchPlaylists() {
@@ -38,23 +38,87 @@ export function fetchPlaylists() {
     }).then(response => response).catch(err => console.error(err));
 }
 
-export function fetchPlaylistInfo(playlistId: string | undefined) {
+export function fetchPlaylistData(playlistId: string | undefined) {
    return fetchData(`https://api.spotify.com/v1/playlists/${playlistId}`, {
         headers: {
             'Content-Type': "application/json",
             'Authorization': 'Bearer ' + Cookies.get('access_token')
         }
-    }).then(response => response).catch(err => console.error(err));
+    }).then(response => response).catch((err) => { throw err });
 };
 
-export function fetchRecommendations() {
-    return fetchData(`https://api.spotify.com/v1/recommendations`, {
+export function fetchAlbumData(albumId: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/albums/${albumId}`, {
          headers: {
              'Content-Type': "application/json",
              'Authorization': 'Bearer ' + Cookies.get('access_token')
          }
-     }).then(response => response).catch(err => console.error(err));
+     }).then(response => response).catch((err) => { throw err });
  };
+
+export function fetchFeaturedPlaylists() {
+    return fetchData(`https://api.spotify.com/v1/browse/featured-playlists`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchNewReleases() {
+    return fetchData(`https://api.spotify.com/v1/browse/new-releases`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchSavedTracks() {
+    return fetchData(`https://api.spotify.com/v1/me/tracks`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchRecommendedArtists(artistId: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchArtist(artistId: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/artists/${artistId}`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchArtistAlbums(artistId: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
+export function fetchArtistTopTracks(artistId: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=ES`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
+
 
 async function fetchData(uri: string, params: any) {
     const result = await fetch(uri, params)
