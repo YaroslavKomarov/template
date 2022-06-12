@@ -119,6 +119,14 @@ export function fetchArtistTopTracks(artistId: string | undefined) {
     }).then(response => response).catch((err) => { throw err });
 };
 
+export function fetchSearchingData(searchRequest: string | undefined) {
+    return fetchData(`https://api.spotify.com/v1/artists/${searchRequest}/top-tracks?market=ES`, {
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': 'Bearer ' + Cookies.get('access_token')
+        }
+    }).then(response => response).catch((err) => { throw err });
+};
 
 async function fetchData(uri: string, params: any) {
     const result = await fetch(uri, params)

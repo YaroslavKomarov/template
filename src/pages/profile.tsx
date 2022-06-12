@@ -22,7 +22,7 @@ function Profile() {
             {profile ? (
                 <div className="profile">
                     <div className="profile__header">
-                        <button onClick={() => navigate(-1)} className="playlist__back-btn btn">
+                        <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
                         <img className="profile__img" src={profile.images?.length > 0 ? profile.images[0].url : "assets/images/default-profile.jpg"}/>

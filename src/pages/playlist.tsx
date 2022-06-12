@@ -25,7 +25,7 @@ function Playlist() {
             {playlist ? (
                 <div className="playlist">
                     <div className="playlist__header">
-                        <button onClick={() => navigate(-1)} className="playlist__back-btn btn">
+                        <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
                         <img src={playlist.images.length > 0 ? playlist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>

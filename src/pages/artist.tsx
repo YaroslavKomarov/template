@@ -38,7 +38,7 @@ function Artist() {
             {artistInfo && topTracks && albums ? (
                 <div className="artist">
                     <div className="artist__header">
-                        <button onClick={() => navigate(-1)} className="playlist__back-btn btn">
+                        <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
                         <img className='artist__header-img' src={artistInfo.images.length > 0 ? artistInfo.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>

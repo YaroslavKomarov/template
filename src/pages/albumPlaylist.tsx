@@ -28,7 +28,7 @@ function AlbumPlaylist() {
             {albumPlaylist ? (
                 <div className="album playlist">
                     <div className="playlist__header">
-                        <button onClick={() => navigate(-1)} className="playlist__back-btn btn">
+                        <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
                         <img src={albumPlaylist.images.length > 0 ? albumPlaylist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
@@ -39,7 +39,7 @@ function AlbumPlaylist() {
                     </div>
                     <div className="album-items-list items-list">
                         <div className="album-items-list__title">
-                            <div>#</div>
+                            <div className='title__index'>#</div>
                             <div>НАЗВАНИЕ</div>
                             <i className="fa fa-clock-o" />
                         </div>

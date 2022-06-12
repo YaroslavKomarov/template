@@ -6,7 +6,7 @@ interface IProps {
     playlist: IPlaylistCard;
 };
 
-const TrackPlayer = ({ playlist }: IProps) => {
+const PlayerController = ({ playlist }: IProps) => {
     const imgUrl = playlist.images?.length > 0 ? playlist.images[0].url : "assets/images/default-track.jpg";
     const owner = formatTitle(playlist.owner?.display_name, 35);
     const title = formatTitle(playlist.name, 35);
@@ -25,4 +25,4 @@ const TrackPlayer = ({ playlist }: IProps) => {
     );
 };
 
-export default TrackPlayer;
+export default PlayerController;

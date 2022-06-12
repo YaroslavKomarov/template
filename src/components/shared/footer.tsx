@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Footer() {
+
     return (
         <footer className="footer">
 			<nav className="footer__navigation">
