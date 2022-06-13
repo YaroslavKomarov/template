@@ -18,7 +18,7 @@ const TrackLine = ({track, index}: IProps) => {
         <div className="item" >
             <div className="item__id">{index + 1}</div>
             <div className="item__song-title">
-                <img className="item__img" src={imgUrl} />
+                <img className="item__img" src={imgUrl} width='48' height='48' />
                 <div className="item__title">{title}</div>
                 <div className="item__subtitle">{artists}</div>
             </div>

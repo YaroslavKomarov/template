@@ -9,6 +9,7 @@ import Artist from './pages/artist';
 import Search from './pages/search';
 import Profile from './pages/profile';
 import Playlist from './pages/playlist';
+import AllItems from './pages/allItems';
 import Mediateka from './pages/mediateka';
 import SavedTracks from './pages/savedTracks';
 import AlbumPlaylist from './pages/albumPlaylist';
@@ -30,6 +31,7 @@ export default function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="search" element={<Search />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="allItems" element={<AllItems />} />
                 <Route path="artist/:id" element={<Artist />} />
                 <Route path="mediateka" element={<Mediateka />} />
                 <Route path="playlist/:id" element={<Playlist />} />

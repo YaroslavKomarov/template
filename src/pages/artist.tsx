@@ -41,7 +41,11 @@ function Artist() {
                         <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
-                        <img className='artist__header-img' src={artistInfo.images.length > 0 ? artistInfo.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
+                        <img 
+                            width='250'
+                            height='250'
+                            className='artist__header-img' 
+                            src={artistInfo.images.length > 0 ? artistInfo.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
                         <div className="playlist__title-wrap">
                             <h1 className="playlist__title page-title">{artistInfo.name}</h1>
                             <p className="playlist__subtitle">{`Число фолловеров: ${artistInfo.followers.total}`}</p>

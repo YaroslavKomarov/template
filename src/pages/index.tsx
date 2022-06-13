@@ -1,5 +1,5 @@
 import { IAlbum, IArtistDetail, IPlaylistCard } from '../scripts/commonSpotifyInterfaces';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { 
 	fetchFeaturedPlaylists, 
@@ -21,7 +21,7 @@ function Index() {
 	const [newReleases, setNewReleases] = useState<any>(null);
 
     useEffect(() => {
-		fetchRecommendedArtists('2q3GG88dVwuQPF4FmySr9I').then(data => setRecommendedArtists(data));
+		fetchRecommendedArtists('7dGJo4pcD2V6oG8kP0tJRR').then(data => setRecommendedArtists(data));
 		fetchFeaturedPlaylists().then(data => setFeaturedPlaylists(data));
 		fetchNewReleases().then(data => setNewReleases(data));
     }, []);
@@ -40,10 +40,14 @@ function Index() {
 					<div className="prevew-area">
 						<div className="prevew-area__title-wrap">
 							<h2 className="prevew-area__title page-title">Взгляните на эти плейлисты</h2>
-							<div className="prevew-area__show-all-items">смотреть все</div>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'playlist', title: 'Взгляните на эти плейлисты', collection: featuredPlaylists}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
 						</div>
 						<div className="prevew-area__content">
-							{featuredPlaylists.playlists.items.length > 0 && featuredPlaylists.playlists.items.map((item: IPlaylistCard) => {
+							{featuredPlaylists.playlists.items.length > 0 && featuredPlaylists.playlists.items.slice(0, 5).map((item: IPlaylistCard) => {
 								return (
 									<PlaylistCard key={item.id} playlist={item} />
 								);
@@ -53,10 +57,14 @@ function Index() {
 					<div className="prevew-area">
 						<div className="prevew-area__title-wrap">
 							<h2 className="prevew-area__title page-title">Свежие релизы</h2>
-							<div className="prevew-area__show-all-items">смотреть все</div>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'album', title: 'Свежие релизы', collection: newReleases}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
 						</div>
 						<div className="prevew-area__content">
-							{newReleases.albums.items.length > 0 && newReleases.albums.items.map((item: IAlbum) => {
+							{newReleases.albums.items.length > 0 && newReleases.albums.items.slice(0, 5).map((item: IAlbum) => {
 								return (
 									<AlbumCard key={item.id} album={item}/>
 								);
@@ -66,10 +74,14 @@ function Index() {
 					<div className="prevew-area">
 						<div className="prevew-area__title-wrap">
 							<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
-							<div className="prevew-area__show-all-items">смотреть все</div>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'artists', title: 'Вам могут понравиться эти исполнители', collection: recommendedArtists}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
 						</div>
 						<div className="prevew-area__content">
-							{recommendedArtists.artists.length > 0 && recommendedArtists.artists.map((item: IArtistDetail) => {
+							{recommendedArtists.artists.length > 0 && recommendedArtists.artists.slice(0, 5).map((item: IArtistDetail) => {
 								return (
 									<ArtistCard key={item.id} artist={item}/>
 								);

@@ -31,7 +31,10 @@ function AlbumPlaylist() {
                         <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
-                        <img src={albumPlaylist.images.length > 0 ? albumPlaylist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
+                        <img 
+                            width='250'
+                            height='250'
+                            src={albumPlaylist.images.length > 0 ? albumPlaylist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
                         <div className="playlist__title-wrap">
                             <h1 className="playlist__title page-title">{albumPlaylist.name}</h1>
                             <p className="playlist__subtitle">{`Альбом, число треков: ${albumPlaylist.total_tracks}`}</p>

@@ -28,7 +28,10 @@ function SavedTracks() {
                         <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
-                        <img src='assets/images/tracks/Eminem_Curtain_call.jpg'/>
+                        <img 
+                            width='250'
+                            height='250'
+                            src='assets/images/tracks/Eminem_Curtain_call.jpg'/>
                         <h1 className="playlist__title page-title">Сохраненные треки</h1>
                     </div>
                     <div className="items-list">

@@ -13,7 +13,7 @@ const PlaylistCard = ({ playlist }: IProps) => {
 
     return (
         <NavLink to={'/playlist/' + playlist.id} className="card" style={{textDecoration: 'none'}}>
-            <img className="card__image" src={imgUrl}/>
+            <img className="card__image" src={imgUrl} width='185' height='185' />
             <div className="card__title">{title}</div>
             <div className="card__subtitle">Автор: {owner}</div>
         </NavLink>

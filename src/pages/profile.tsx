@@ -25,7 +25,10 @@ function Profile() {
                         <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
-                        <img className="profile__img" src={profile.images?.length > 0 ? profile.images[0].url : "assets/images/default-profile.jpg"}/>
+                        <img 
+                            width='250'
+                            height='250'
+                            className="profile__img" src={profile.images?.length > 0 ? profile.images[0].url : "assets/images/default-profile.jpg"}/>
                         <h2 className="profile__name page-title">{profile.display_name}</h2>
                     </div>
                     <div className="profile__info">

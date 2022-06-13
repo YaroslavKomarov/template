@@ -12,7 +12,7 @@ const ArtistCard = ({ artist }: IProps) => {
 
     return (
         <NavLink to={'/artist/' + artist.id} className="author-card card" style={{textDecoration: 'none'}}>
-            <img className="card__image" src={imgUrl}/>
+            <img className="card__image" src={imgUrl} width='185' height='185' />
             <div className="card__title">{name}</div>
             <div className="card__subtitle">Исполнитель</div>
         </NavLink>

@@ -28,7 +28,10 @@ function Playlist() {
                         <button onClick={() => navigate(-1)} className="back-btn btn">
                             <i className="fa fa-angle-left"></i>
                         </button>
-                        <img src={playlist.images.length > 0 ? playlist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
+                        <img 
+                            width='250'
+                            height='250'
+                            src={playlist.images.length > 0 ? playlist.images[0].url : 'assets/images/tracks/Eminem_Curtain_call.jpg'}/>
                         <h1 className="playlist__title page-title">{playlist.name}</h1>
                     </div>
                     <div className="items-list">
