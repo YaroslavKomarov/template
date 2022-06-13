@@ -524,9 +524,15 @@
   -webkit-box-shadow: 0px 7px 35px 5px rgba(18, 18, 18, 0.68);
   box-shadow: 0px 7px 35px 5px rgba(18, 18, 18, 0.68);
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .album-prevew-area {
   padding: 45px;
   padding-top: 0;
+}
+
+.content__items-list {
+  padding-top: 10px;
+  height: 100%;
 }

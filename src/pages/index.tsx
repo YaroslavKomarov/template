@@ -42,7 +42,7 @@ function Index() {
 							<h2 className="prevew-area__title page-title">Взгляните на эти плейлисты</h2>
 							<NavLink 
 								to="/allItems" 
-								state={{type: 'playlist', title: 'Взгляните на эти плейлисты', collection: featuredPlaylists}}
+								state={{type: 'playlist', title: 'Взгляните на эти плейлисты', collection: featuredPlaylists.playlists.items}}
 								className="prevew-area__show-all-items">смотреть все
 							</NavLink>
 						</div>
@@ -59,7 +59,7 @@ function Index() {
 							<h2 className="prevew-area__title page-title">Свежие релизы</h2>
 							<NavLink 
 								to="/allItems" 
-								state={{type: 'album', title: 'Свежие релизы', collection: newReleases}}
+								state={{type: 'album', title: 'Свежие релизы', collection: newReleases.albums.items}}
 								className="prevew-area__show-all-items">смотреть все
 							</NavLink>
 						</div>
@@ -76,7 +76,7 @@ function Index() {
 							<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
 							<NavLink 
 								to="/allItems" 
-								state={{type: 'artists', title: 'Вам могут понравиться эти исполнители', collection: recommendedArtists}}
+								state={{type: 'artists', title: 'Вам могут понравиться эти исполнители', collection: recommendedArtists.artists}}
 								className="prevew-area__show-all-items">смотреть все
 							</NavLink>
 						</div>

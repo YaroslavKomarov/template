@@ -12,6 +12,7 @@ import Playlist from './pages/playlist';
 import AllItems from './pages/allItems';
 import Mediateka from './pages/mediateka';
 import SavedTracks from './pages/savedTracks';
+import SearchResult from './pages/searchReult';
 import AlbumPlaylist from './pages/albumPlaylist';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
                 <Route path="mediateka" element={<Mediateka />} />
                 <Route path="playlist/:id" element={<Playlist />} />
                 <Route path="savedTracks" element={<SavedTracks />} />
+                <Route path="searchResult" element={<SearchResult />} />
                 <Route path="albumPlaylist/:id" element={<AlbumPlaylist />} />
             </Routes>
         </BrowserRouter>

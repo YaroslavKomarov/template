@@ -10,8 +10,8 @@ import PlaylistCard from '../components/playlistCard';
 interface LocationState {
     type: string;
     title: string;
-    collection: any;
-}
+    collection: any[];
+};
 
 function AllItems() {
     const location = useLocation();
@@ -20,19 +20,19 @@ function AllItems() {
 
     const getRenderItems = () => {
         if (type === 'playlist') {
-            return collection.playlists.items.length > 0 && collection.playlists.items.map((item: IPlaylistCard) => {
+            return collection.length > 0 && collection.map((item: IPlaylistCard) => {
                 return (
                     <PlaylistCard key={item.id} playlist={item} />
                 );
             });
         } else if (type === 'album') {
-            return collection.albums.items.length > 0 && collection.albums.items.map((item: IAlbum) => {
+            return collection.length > 0 && collection.map((item: IAlbum) => {
                 return (
                     <AlbumCard key={item.id} album={item}/>
                 );
             });
         } else {
-            return collection.artists.length > 0 && collection.artists.map((item: IArtistDetail) => {
+            return collection.length > 0 && collection.map((item: IArtistDetail) => {
                 return (
                     <ArtistCard key={item.id} artist={item}/>
                 );

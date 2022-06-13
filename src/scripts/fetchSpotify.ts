@@ -120,7 +120,8 @@ export function fetchArtistTopTracks(artistId: string | undefined) {
 };
 
 export function fetchSearchingData(searchRequest: string | undefined) {
-    return fetchData(`https://api.spotify.com/v1/artists/${searchRequest}/top-tracks?market=ES`, {
+    const type = 'track,artist,album';
+    return fetchData(`https://api.spotify.com/v1/search?q=${searchRequest}&type=${type}&include_external=audio`, {
         headers: {
             'Content-Type': "application/json",
             'Authorization': 'Bearer ' + Cookies.get('access_token')
