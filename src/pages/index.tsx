@@ -1,81 +1,97 @@
-import Header from './shared/header';
-import Aside from './shared/aside';
-import Footer from './shared/footer';
+import { IAlbum, IArtistDetail, IPlaylistCard } from '../scripts/commonSpotifyInterfaces';
+import { Navigate, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { 
+	fetchFeaturedPlaylists, 
+	fetchNewReleases,
+	fetchRecommendedArtists 
+} from '../scripts/fetchSpotify'
+import PlaylistCard from '../components/playlistCard';
+import AlbumCard from '../components/albumCard';
+import Header from '../components/shared/header';
+import Footer from '../components/shared/footer';
+import Aside from '../components/shared/aside';
+import LoadingPage from './loading';
+import Cookies from 'js-cookie';
+import ArtistCard from '../components/artistCard';
 
 function Index() {
+	const [recommendedArtists, setRecommendedArtists] = useState<any>(null);
+	const [featuredPlaylists, setFeaturedPlaylists] = useState<any>(null);
+	const [newReleases, setNewReleases] = useState<any>(null);
+
+    useEffect(() => {
+		fetchRecommendedArtists('7dGJo4pcD2V6oG8kP0tJRR').then(data => setRecommendedArtists(data));
+		fetchFeaturedPlaylists().then(data => setFeaturedPlaylists(data));
+		fetchNewReleases().then(data => setNewReleases(data));
+    }, []);
+	
+	if (!Cookies.get('access_token')) {
+		return <Navigate to='/login' />;
+	}
+
 	return (
 		<div className="app">
 			<Header/>
 			<Aside />
-			<main className="content">
-				<h1 className="content__title page-title">Рекомендации</h1>
-				<div className="prevew-area">
-					<div className="prevew-area__title-wrap">
-						<h2 className="prevew-area__title page-title">Послушайте эти трэки</h2>
-						<div className="prevew-area__show-all-items">смотреть все</div>
-					</div>
-					<div className="prevew-area__content">
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
-							<div className="card__title">Without me</div>
-							<div className="card__subtitle">Eminem</div>
+			{featuredPlaylists && newReleases && recommendedArtists ? (
+				<main className="content">
+					<h1 className="content__title page-title">Рекомендации</h1>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Взгляните на эти плейлисты</h2>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'playlist', title: 'Взгляните на эти плейлисты', collection: featuredPlaylists.playlists.items}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
 						</div>
-						<div className="card">
-							<img className="card__image"src="assets/images/tracks/Eminem_show.jpg"/>
-							<div className="card__title">Lose Yourself</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_To_Be_Murdered_By.jpg"/>
-							<div className="card__title">Rap God</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem-revival-sober.jpg"/>
-							<div className="card__title">Soldier</div>
-							<div className="card__subtitle">Eminem</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_show.jpg"/>
-							<div className="card__title">'Till I Collapse</div>
-							<div className="card__subtitle">Eminem</div>
+						<div className="prevew-area__content">
+							{featuredPlaylists.playlists.items.length > 0 && featuredPlaylists.playlists.items.slice(0, 5).map((item: IPlaylistCard) => {
+								return (
+									<PlaylistCard key={item.id} playlist={item} />
+								);
+							})}
 						</div>
 					</div>
-				</div>
-				<div className="prevew-area">
-					<div className="prevew-area__title-wrap">
-						<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
-						<div className="prevew-area__show-all-items">смотреть все</div>
-					</div>
-					<div className="prevew-area__content">
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Eminem.jpg"/>
-							<div className="card__title">Eminem</div>
-							<div className="card__subtitle">Исполнитель</div>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Свежие релизы</h2>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'album', title: 'Свежие релизы', collection: newReleases.albums.items}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
 						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Tzoi.jpg"/>
-							<div className="card__title">Виктор Цой</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Linkin_Park.jpg"/>
-							<div className="card__title">Linkin Park</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/DDT.jpg"/>
-							<div className="card__title">ДДТ</div>
-							<div className="card__subtitle">Исполнитель</div>
-						</div>
-						<div className="author-card card">
-							<img className="card__image" src="assets/images/authors/Boyarsky.jpg"/>
-							<div className="card__title">Михаил Боярский</div>
-							<div className="card__subtitle">Исполнитель</div>
+						<div className="prevew-area__content">
+							{newReleases.albums.items.length > 0 && newReleases.albums.items.slice(0, 5).map((item: IAlbum) => {
+								return (
+									<AlbumCard key={item.id} album={item}/>
+								);
+							})}
 						</div>
 					</div>
-				</div>
-			</main>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Вам могут понравиться эти исполнители</h2>
+							<NavLink 
+								to="/allItems" 
+								state={{type: 'artists', title: 'Вам могут понравиться эти исполнители', collection: recommendedArtists.artists}}
+								className="prevew-area__show-all-items">смотреть все
+							</NavLink>
+						</div>
+						<div className="prevew-area__content">
+							{recommendedArtists.artists.length > 0 && recommendedArtists.artists.slice(0, 5).map((item: IArtistDetail) => {
+								return (
+									<ArtistCard key={item.id} artist={item}/>
+								);
+							})}
+						</div>
+					</div>
+				</main>
+			) : (
+				<LoadingPage />
+			)}
 			<Footer/>
 		</div>
 	);

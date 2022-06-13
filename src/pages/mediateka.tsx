@@ -1,58 +1,42 @@
-import Header from './shared/header';
-import Aside from './shared/aside';
-import Footer from './shared/footer';
-import { NavLink } from 'react-router-dom';
+import { IPlaylistCard } from '../scripts/commonSpotifyInterfaces';
+import { fetchPlaylists } from '../scripts/fetchSpotify';
+import { useEffect, useState } from 'react';
+import PlaylistCard from '../components/playlistCard'
+import Header from '../components/shared/header';
+import Aside from '../components/shared/aside';
+import Footer from '../components/shared/footer';
+import LoadingPage from './loading';
 
 function Mediateka() {
+    const [playlists, setPlaylists] = useState<any>(null)
+
+    useEffect(() => {
+        fetchPlaylists().then(playlistsData => setPlaylists(playlistsData));
+    }, []);
+	
     return (
         <div className="app">
 			<Header/>
 			<Aside />
-            <div className="content">
-                <h1 className="content__title page-title">Медиатека</h1>
-				<div className="prevew-area">
-					<div className="prevew-area__title-wrap">
-						<h2 className="prevew-area__title page-title">Плэйлисты</h2>
-					</div>
-					<div className="prevew-area__content">
-						<NavLink to="/playlist" className="card" style={{textDecoration: 'none'}}>
-							<img className="card__image" src="assets/images/tracks/Eminem_Curtain_call.jpg"/>
-							<div className="card__title">M&M's</div>
-							<div className="card__subtitle">Автор: user</div>
-						</NavLink>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Linkin_Park.jpg"/>
-							<div className="card__title">ROCK</div>
-							<div className="card__subtitle">Автор: user</div>
+			{playlists ? (
+				<div className="content">
+					<h1 className="content__title page-title">Медиатека</h1>
+					<div className="prevew-area">
+						<div className="prevew-area__title-wrap">
+							<h2 className="prevew-area__title page-title">Плэйлисты</h2>
 						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Bethowen.jpg"/>
-							<div className="card__title">Классика</div>
-							<div className="card__subtitle">Автор: user</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem-revival-sober.jpg"/>
-							<div className="card__title">Вечеринка</div>
-							<div className="card__subtitle">Автор: user</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/Boyarski.jpg"/>
-							<div className="card__title">Тренировка</div>
-							<div className="card__subtitle">Автор: user</div>
-						</div>
-                        <div className="card">
-							<img className="card__image" src="assets/images/tracks/Eminem_show.jpg"/>
-							<div className="card__title">Rap God</div>
-							<div className="card__subtitle">Автор: user</div>
-						</div>
-						<div className="card">
-							<img className="card__image" src="assets/images/tracks/relax.png"/>
-							<div className="card__title">Relax</div>
-							<div className="card__subtitle">Автор: user</div>
+						<div className="prevew-area__content">
+							{playlists.items.length > 0 && playlists.items.map((item: IPlaylistCard) => {
+								return (
+									<PlaylistCard key={item.id} playlist={item} />
+								);
+							})}
 						</div>
 					</div>
 				</div>
-            </div>
+			) : (
+				<LoadingPage />
+			)}
             <Footer />
         </div>
     );
